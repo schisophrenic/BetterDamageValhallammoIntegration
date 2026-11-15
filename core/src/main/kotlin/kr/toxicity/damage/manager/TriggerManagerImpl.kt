@@ -50,7 +50,7 @@ object TriggerManagerImpl : TriggerManager {
             return when (val attacker = event.damager) {
                 is Player -> attacker
                 is Projectile -> attacker.shooter as? Player
-                else -> null
+                else -> event.entity as? Player // Show incoming mob hits to the damaged player
             }
         }
         return event.entity as? Player
