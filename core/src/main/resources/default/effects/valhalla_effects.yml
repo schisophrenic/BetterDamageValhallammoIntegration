@@ -1,0 +1,350 @@
+# BetterDamage ValhallaMMO integration. Each effect has an independent glyph-font.
+# For custom glyphs, replace glyph with your resource-pack character and set
+# glyph-font: "namespace:font_name". Digits still use BetterDamage's number font.
+# Configure on/off in BetterDamage/config.yml under valhalla-integration.
+
+valhalla_fire:
+  image: default_image
+  glyph: "🔥"
+  glyph-font: "minecraft:default"
+  color: "#FF7440"
+  duration: 20
+  interval: 2
+  show-global-player: false
+  number-format: "#.#"
+  transformation:
+    position:
+      x: 0
+      y: 1.5sin(t / 40 * pi)
+      z: 0
+    rotation:
+      x: 60(r - 0.5)
+      y: 60(r - 0.5)
+      z: 0
+    scale:
+      x: cos(t / 40 * pi)
+      y: cos(t / 40 * pi)
+      z: cos(t / 40 * pi)
+
+valhalla_magic:
+  image: default_image
+  glyph: "✦"
+  glyph-font: "minecraft:default"
+  color: "#BC75F5"
+  duration: 20
+  interval: 2
+  show-global-player: false
+  number-format: "#.#"
+  transformation:
+    position:
+      x: 0
+      y: 1.5sin(t / 40 * pi)
+      z: 0
+    rotation:
+      x: 60(r - 0.5)
+      y: 60(r - 0.5)
+      z: 0
+    scale:
+      x: cos(t / 40 * pi)
+      y: cos(t / 40 * pi)
+      z: cos(t / 40 * pi)
+
+valhalla_projectile:
+  image: default_image
+  glyph: "➶"
+  glyph-font: "minecraft:default"
+  color: "#EAA272"
+  duration: 20
+  interval: 2
+  show-global-player: false
+  number-format: "#.#"
+  transformation:
+    position:
+      x: 0
+      y: 1.5sin(t / 40 * pi)
+      z: 0
+    rotation:
+      x: 60(r - 0.5)
+      y: 60(r - 0.5)
+      z: 0
+    scale:
+      x: cos(t / 40 * pi)
+      y: cos(t / 40 * pi)
+      z: cos(t / 40 * pi)
+
+valhalla_explosion:
+  image: default_image
+  glyph: "✹"
+  glyph-font: "minecraft:default"
+  color: "#FFB74D"
+  duration: 20
+  interval: 2
+  show-global-player: false
+  number-format: "#.#"
+  transformation:
+    position:
+      x: 0
+      y: 1.5sin(t / 40 * pi)
+      z: 0
+    rotation:
+      x: 60(r - 0.5)
+      y: 60(r - 0.5)
+      z: 0
+    scale:
+      x: cos(t / 40 * pi)
+      y: cos(t / 40 * pi)
+      z: cos(t / 40 * pi)
+
+valhalla_poison:
+  image: default_image
+  glyph: "☠"
+  glyph-font: "minecraft:default"
+  color: "#66CC69"
+  duration: 20
+  interval: 2
+  show-global-player: false
+  number-format: "#.#"
+  transformation:
+    position:
+      x: 0
+      y: 1.5sin(t / 40 * pi)
+      z: 0
+    rotation:
+      x: 60(r - 0.5)
+      y: 60(r - 0.5)
+      z: 0
+    scale:
+      x: cos(t / 40 * pi)
+      y: cos(t / 40 * pi)
+      z: cos(t / 40 * pi)
+
+valhalla_falling:
+  image: default_image
+  glyph: "↓"
+  glyph-font: "minecraft:default"
+  color: "#EBA88B"
+  duration: 20
+  interval: 2
+  show-global-player: false
+  number-format: "#.#"
+  transformation:
+    position:
+      x: 0
+      y: 1.5sin(t / 40 * pi)
+      z: 0
+    rotation:
+      x: 60(r - 0.5)
+      y: 60(r - 0.5)
+      z: 0
+    scale:
+      x: cos(t / 40 * pi)
+      y: cos(t / 40 * pi)
+      z: cos(t / 40 * pi)
+
+valhalla_melee:
+  image: default_image
+  glyph: "⚔"
+  glyph-font: "minecraft:default"
+  color: "#FF6666"
+  duration: 20
+  interval: 2
+  show-global-player: false
+  number-format: "#.#"
+  transformation:
+    position:
+      x: 0
+      y: 1.5sin(t / 40 * pi)
+      z: 0
+    rotation:
+      x: 60(r - 0.5)
+      y: 60(r - 0.5)
+      z: 0
+    scale:
+      x: cos(t / 40 * pi)
+      y: cos(t / 40 * pi)
+      z: cos(t / 40 * pi)
+
+valhalla_bleed:
+  image: default_image
+  glyph: "◆"
+  glyph-font: "minecraft:default"
+  color: "#BE4040"
+  duration: 20
+  interval: 2
+  show-global-player: false
+  number-format: "#.#"
+  transformation:
+    position:
+      x: 0
+      y: 1.5sin(t / 40 * pi)
+      z: 0
+    rotation:
+      x: 60(r - 0.5)
+      y: 60(r - 0.5)
+      z: 0
+    scale:
+      x: cos(t / 40 * pi)
+      y: cos(t / 40 * pi)
+      z: cos(t / 40 * pi)
+
+valhalla_freezing:
+  image: default_image
+  glyph: "❄"
+  glyph-font: "minecraft:default"
+  color: "#74D6FF"
+  duration: 20
+  interval: 2
+  show-global-player: false
+  number-format: "#.#"
+  transformation:
+    position:
+      x: 0
+      y: 1.5sin(t / 40 * pi)
+      z: 0
+    rotation:
+      x: 60(r - 0.5)
+      y: 60(r - 0.5)
+      z: 0
+    scale:
+      x: cos(t / 40 * pi)
+      y: cos(t / 40 * pi)
+      z: cos(t / 40 * pi)
+
+valhalla_lightning:
+  image: default_image
+  glyph: "⚡"
+  glyph-font: "minecraft:default"
+  color: "#FFF176"
+  duration: 20
+  interval: 2
+  show-global-player: false
+  number-format: "#.#"
+  transformation:
+    position:
+      x: 0
+      y: 1.5sin(t / 40 * pi)
+      z: 0
+    rotation:
+      x: 60(r - 0.5)
+      y: 60(r - 0.5)
+      z: 0
+    scale:
+      x: cos(t / 40 * pi)
+      y: cos(t / 40 * pi)
+      z: cos(t / 40 * pi)
+
+valhalla_bludgeoning:
+  image: default_image
+  glyph: "✠"
+  glyph-font: "minecraft:default"
+  color: "#F28D63"
+  duration: 20
+  interval: 2
+  show-global-player: false
+  number-format: "#.#"
+  transformation:
+    position:
+      x: 0
+      y: 1.5sin(t / 40 * pi)
+      z: 0
+    rotation:
+      x: 60(r - 0.5)
+      y: 60(r - 0.5)
+      z: 0
+    scale:
+      x: cos(t / 40 * pi)
+      y: cos(t / 40 * pi)
+      z: cos(t / 40 * pi)
+
+valhalla_radiant:
+  image: default_image
+  glyph: "✧"
+  glyph-font: "minecraft:default"
+  color: "#FFF6B1"
+  duration: 20
+  interval: 2
+  show-global-player: false
+  number-format: "#.#"
+  transformation:
+    position:
+      x: 0
+      y: 1.5sin(t / 40 * pi)
+      z: 0
+    rotation:
+      x: 60(r - 0.5)
+      y: 60(r - 0.5)
+      z: 0
+    scale:
+      x: cos(t / 40 * pi)
+      y: cos(t / 40 * pi)
+      z: cos(t / 40 * pi)
+
+valhalla_necrotic:
+  image: default_image
+  glyph: "☽"
+  glyph-font: "minecraft:default"
+  color: "#9987B9"
+  duration: 20
+  interval: 2
+  show-global-player: false
+  number-format: "#.#"
+  transformation:
+    position:
+      x: 0
+      y: 1.5sin(t / 40 * pi)
+      z: 0
+    rotation:
+      x: 60(r - 0.5)
+      y: 60(r - 0.5)
+      z: 0
+    scale:
+      x: cos(t / 40 * pi)
+      y: cos(t / 40 * pi)
+      z: cos(t / 40 * pi)
+
+valhalla_other:
+  image: default_image
+  glyph: "•"
+  glyph-font: "minecraft:default"
+  color: "#EEEEEE"
+  duration: 20
+  interval: 2
+  show-global-player: false
+  number-format: "#.#"
+  transformation:
+    position:
+      x: 0
+      y: 1.5sin(t / 40 * pi)
+      z: 0
+    rotation:
+      x: 60(r - 0.5)
+      y: 60(r - 0.5)
+      z: 0
+    scale:
+      x: cos(t / 40 * pi)
+      y: cos(t / 40 * pi)
+      z: cos(t / 40 * pi)
+
+valhalla_healing:
+  image: default_image
+  glyph: "+"
+  glyph-font: "minecraft:default"
+  color: "#70F090"
+  duration: 20
+  interval: 2
+  show-global-player: false
+  number-format: "#.#"
+  transformation:
+    position:
+      x: 0
+      y: 1.5sin(t / 40 * pi)
+      z: 0
+    rotation:
+      x: 60(r - 0.5)
+      y: 60(r - 0.5)
+      z: 0
+    scale:
+      x: cos(t / 40 * pi)
+      y: cos(t / 40 * pi)
+      z: cos(t / 40 * pi)
+
