@@ -91,7 +91,8 @@ bukkitPluginYaml {
         "MMOItems",
         "ModelEngine",
         "CraftEngine",
-        "Nexo"
+        "Nexo",
+        "ValhallaMMO"
     )
     libraries = listOf(
         "net.kyori:adventure-api:$adventure",
