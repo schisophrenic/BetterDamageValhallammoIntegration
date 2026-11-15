@@ -10,6 +10,7 @@ import kr.toxicity.damage.api.image.DamageImage;
 import kr.toxicity.damage.api.scheduler.DamageScheduler;
 import kr.toxicity.damage.api.util.BitUtil;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.format.ShadowColor;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
@@ -115,6 +116,10 @@ public interface DamageEffect {
      */
     int shadowColor();
 
+    /** Optional glyph prefix, rendered using an independent font from damage digits. */
+    default @NotNull String glyph() { return ""; }
+    default @NotNull String glyphFont() { return "minecraft:default"; }
+
     /**
      * Parses this damage to string
      * @param damage damage
@@ -159,10 +164,15 @@ public interface DamageEffect {
         var display = BetterDamage.inst().nms().create(initialLocation);
         display.frame(interval() + 1);
         display.billboard(billboard());
-        display.text(Component.text(tb -> {
-            tb.content(toString(data.damage())).color(color()).font(image().key());
-            if (BetterDamage.inst().version().supportShadowColor()) tb.shadowColor(ShadowColor.shadowColor(shadowColor()));
-        }).compact());
+        Component number = Component.text(toString(data.damage())).color(color()).font(image().key());
+        Component displayText = number;
+        if (!glyph().isEmpty()) {
+            Component symbol = Component.text(glyph()).color(color()).font(Key.key(glyphFont()));
+            displayText = symbol.append(number);
+        }
+        if (BetterDamage.inst().version().supportShadowColor())
+            displayText = displayText.shadowColor(ShadowColor.shadowColor(shadowColor()));
+        display.text(displayText.compact());
         var stream = Stream.of(data.player());
         if (showGlobalPlayer()) stream = Stream.concat(stream, data.entity().getTrackedBy().stream());
         stream.forEach(display::spawn);
