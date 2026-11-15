@@ -75,9 +75,9 @@ class ValhallaMMOCompatibility : Compatibility {
                     val target = args?.getOrNull(0) as? LivingEntity
                     if (target == null) false
                     else {
-                        val typeName = getName.invoke(args[1]) as? String ?: "OTHER"
+                        val typeName = getName.invoke(args?.getOrNull(1)) as? String ?: "OTHER"
                         val name = typeName.lowercase(Locale.ROOT).takeIf { it in TYPES } ?: "other"
-                        val amount = (args[2] as Number).toDouble()
+                        val amount = (args?.getOrNull(2) as Number).toDouble()
                         val viewer = findViewer(target, getLastDamager)
                         if (viewer != null && amount.isFinite() && amount > 0.0) {
                             val effect = BetterDamage.inst().playerManager().player(viewer.uniqueId)
