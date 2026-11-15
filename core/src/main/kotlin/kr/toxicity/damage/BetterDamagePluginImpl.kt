@@ -92,12 +92,16 @@ class BetterDamagePluginImpl : JavaPlugin(), BetterDamagePlugin {
     override fun onLoad() {
         BetterDamage.inst(this)
         managers.forEach(DamageManager::load)
-        if (!DATA_FOLDER.exists()) {
-            loadAssets("default") { path, stream ->
-                File(DATA_FOLDER, path).apply {
-                    parentFile.mkdirs()
-                }.outputStream().buffered().use { output ->
-                    stream.copyTo(output)
+        // Add newly bundled effect presets to existing installations without
+        // overwriting any user-edited skin/effect configurations.
+        loadAssets("default") { path, stream ->
+            File(DATA_FOLDER, path).apply {
+                parentFile.mkdirs()
+            }.let { destination ->
+                if (!destination.exists()) {
+                    destination.outputStream().buffered().use { output ->
+                        stream.copyTo(output)
+                    }
                 }
             }
         }
