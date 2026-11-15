@@ -1,0 +1,324 @@
+# Auto-installed defaults. Each ValhallaMMO type gets its own bitmap icon.
+# Existing files are left untouched when BetterDamage is updated.
+valhallammo_fire:
+    image: default_image
+    icon-image: valhallammo_icons
+    icon: "\uE200"
+    icon-color: "#FF7847"
+    color: "#FF7847"
+    duration: 20
+    interval: 2
+    show-global-player: true
+    transformation:
+        position:
+            x: 0
+            y: 1.5sin(t / 40 * pi)
+            z: 0
+        rotation:
+            x: 60(r - 0.5)
+            y: 60(r - 0.5)
+            z: 0
+        scale:
+            x: cos(t / 40 * pi)
+            y: cos(t / 40 * pi)
+            z: cos(t / 40 * pi)
+
+valhallammo_magic:
+    image: default_image
+    icon-image: valhallammo_icons
+    icon: "\uE201"
+    icon-color: "#D891FF"
+    color: "#D891FF"
+    duration: 20
+    interval: 2
+    show-global-player: true
+    transformation:
+        position:
+            x: 0
+            y: 1.5sin(t / 40 * pi)
+            z: 0
+        rotation:
+            x: 60(r - 0.5)
+            y: 60(r - 0.5)
+            z: 0
+        scale:
+            x: cos(t / 40 * pi)
+            y: cos(t / 40 * pi)
+            z: cos(t / 40 * pi)
+
+valhallammo_projectile:
+    image: default_image
+    icon-image: valhallammo_icons
+    icon: "\uE202"
+    icon-color: "#ACE2FF"
+    color: "#ACE2FF"
+    duration: 20
+    interval: 2
+    show-global-player: true
+    transformation:
+        position:
+            x: 0
+            y: 1.5sin(t / 40 * pi)
+            z: 0
+        rotation:
+            x: 60(r - 0.5)
+            y: 60(r - 0.5)
+            z: 0
+        scale:
+            x: cos(t / 40 * pi)
+            y: cos(t / 40 * pi)
+            z: cos(t / 40 * pi)
+
+valhallammo_explosion:
+    image: default_image
+    icon-image: valhallammo_icons
+    icon: "\uE203"
+    icon-color: "#FFC15C"
+    color: "#FFC15C"
+    duration: 20
+    interval: 2
+    show-global-player: true
+    transformation:
+        position:
+            x: 0
+            y: 1.5sin(t / 40 * pi)
+            z: 0
+        rotation:
+            x: 60(r - 0.5)
+            y: 60(r - 0.5)
+            z: 0
+        scale:
+            x: cos(t / 40 * pi)
+            y: cos(t / 40 * pi)
+            z: cos(t / 40 * pi)
+
+valhallammo_poison:
+    image: default_image
+    icon-image: valhallammo_icons
+    icon: "\uE204"
+    icon-color: "#72D890"
+    color: "#72D890"
+    duration: 20
+    interval: 2
+    show-global-player: true
+    transformation:
+        position:
+            x: 0
+            y: 1.5sin(t / 40 * pi)
+            z: 0
+        rotation:
+            x: 60(r - 0.5)
+            y: 60(r - 0.5)
+            z: 0
+        scale:
+            x: cos(t / 40 * pi)
+            y: cos(t / 40 * pi)
+            z: cos(t / 40 * pi)
+
+valhallammo_falling:
+    image: default_image
+    icon-image: valhallammo_icons
+    icon: "\uE205"
+    icon-color: "#99D8FF"
+    color: "#99D8FF"
+    duration: 20
+    interval: 2
+    show-global-player: true
+    transformation:
+        position:
+            x: 0
+            y: 1.5sin(t / 40 * pi)
+            z: 0
+        rotation:
+            x: 60(r - 0.5)
+            y: 60(r - 0.5)
+            z: 0
+        scale:
+            x: cos(t / 40 * pi)
+            y: cos(t / 40 * pi)
+            z: cos(t / 40 * pi)
+
+valhallammo_melee:
+    image: default_image
+    icon-image: valhallammo_icons
+    icon: "\uE206"
+    icon-color: "#DFE8F6"
+    color: "#DFE8F6"
+    duration: 20
+    interval: 2
+    show-global-player: true
+    transformation:
+        position:
+            x: 0
+            y: 1.5sin(t / 40 * pi)
+            z: 0
+        rotation:
+            x: 60(r - 0.5)
+            y: 60(r - 0.5)
+            z: 0
+        scale:
+            x: cos(t / 40 * pi)
+            y: cos(t / 40 * pi)
+            z: cos(t / 40 * pi)
+
+valhallammo_bleed:
+    image: default_image
+    icon-image: valhallammo_icons
+    icon: "\uE207"
+    icon-color: "#F16A79"
+    color: "#F16A79"
+    duration: 20
+    interval: 2
+    show-global-player: true
+    transformation:
+        position:
+            x: 0
+            y: 1.5sin(t / 40 * pi)
+            z: 0
+        rotation:
+            x: 60(r - 0.5)
+            y: 60(r - 0.5)
+            z: 0
+        scale:
+            x: cos(t / 40 * pi)
+            y: cos(t / 40 * pi)
+            z: cos(t / 40 * pi)
+
+valhallammo_freezing:
+    image: default_image
+    icon-image: valhallammo_icons
+    icon: "\uE208"
+    icon-color: "#8DE6FF"
+    color: "#8DE6FF"
+    duration: 20
+    interval: 2
+    show-global-player: true
+    transformation:
+        position:
+            x: 0
+            y: 1.5sin(t / 40 * pi)
+            z: 0
+        rotation:
+            x: 60(r - 0.5)
+            y: 60(r - 0.5)
+            z: 0
+        scale:
+            x: cos(t / 40 * pi)
+            y: cos(t / 40 * pi)
+            z: cos(t / 40 * pi)
+
+valhallammo_lightning:
+    image: default_image
+    icon-image: valhallammo_icons
+    icon: "\uE209"
+    icon-color: "#FFE25E"
+    color: "#FFE25E"
+    duration: 20
+    interval: 2
+    show-global-player: true
+    transformation:
+        position:
+            x: 0
+            y: 1.5sin(t / 40 * pi)
+            z: 0
+        rotation:
+            x: 60(r - 0.5)
+            y: 60(r - 0.5)
+            z: 0
+        scale:
+            x: cos(t / 40 * pi)
+            y: cos(t / 40 * pi)
+            z: cos(t / 40 * pi)
+
+valhallammo_bludgeoning:
+    image: default_image
+    icon-image: valhallammo_icons
+    icon: "\uE20A"
+    icon-color: "#E4C99B"
+    color: "#E4C99B"
+    duration: 20
+    interval: 2
+    show-global-player: true
+    transformation:
+        position:
+            x: 0
+            y: 1.5sin(t / 40 * pi)
+            z: 0
+        rotation:
+            x: 60(r - 0.5)
+            y: 60(r - 0.5)
+            z: 0
+        scale:
+            x: cos(t / 40 * pi)
+            y: cos(t / 40 * pi)
+            z: cos(t / 40 * pi)
+
+valhallammo_radiant:
+    image: default_image
+    icon-image: valhallammo_icons
+    icon: "\uE20B"
+    icon-color: "#FFF0BA"
+    color: "#FFF0BA"
+    duration: 20
+    interval: 2
+    show-global-player: true
+    transformation:
+        position:
+            x: 0
+            y: 1.5sin(t / 40 * pi)
+            z: 0
+        rotation:
+            x: 60(r - 0.5)
+            y: 60(r - 0.5)
+            z: 0
+        scale:
+            x: cos(t / 40 * pi)
+            y: cos(t / 40 * pi)
+            z: cos(t / 40 * pi)
+
+valhallammo_necrotic:
+    image: default_image
+    icon-image: valhallammo_icons
+    icon: "\uE20C"
+    icon-color: "#BAA1D3"
+    color: "#BAA1D3"
+    duration: 20
+    interval: 2
+    show-global-player: true
+    transformation:
+        position:
+            x: 0
+            y: 1.5sin(t / 40 * pi)
+            z: 0
+        rotation:
+            x: 60(r - 0.5)
+            y: 60(r - 0.5)
+            z: 0
+        scale:
+            x: cos(t / 40 * pi)
+            y: cos(t / 40 * pi)
+            z: cos(t / 40 * pi)
+
+valhallammo_other:
+    image: default_image
+    icon-image: valhallammo_icons
+    icon: "\uE20D"
+    icon-color: "#C6CDD8"
+    color: "#C6CDD8"
+    duration: 20
+    interval: 2
+    show-global-player: true
+    transformation:
+        position:
+            x: 0
+            y: 1.5sin(t / 40 * pi)
+            z: 0
+        rotation:
+            x: 60(r - 0.5)
+            y: 60(r - 0.5)
+            z: 0
+        scale:
+            x: cos(t / 40 * pi)
+            y: cos(t / 40 * pi)
+            z: cos(t / 40 * pi)
+

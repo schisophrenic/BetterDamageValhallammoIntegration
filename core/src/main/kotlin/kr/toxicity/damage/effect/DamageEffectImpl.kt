@@ -9,6 +9,7 @@ import kr.toxicity.damage.manager.ImageManagerImpl
 import kr.toxicity.damage.util.getAsEquation
 import kr.toxicity.damage.util.ifNull
 import kr.toxicity.damage.util.toTextColor
+import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.TextColor
 import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.entity.Display
@@ -20,6 +21,12 @@ class DamageEffectImpl(section: ConfigurationSection) : DamageEffect {
     private val image = section.getString("image")?.let {
         ImageManagerImpl.image(it).ifNull { "This image doesn't exist: $it" }
     } ?: DamageImage.NOT_SET
+    private val icon = section.getString("icon")?.takeIf { it.isNotEmpty() }?.let { glyph ->
+        val iconImageName = section.getString("icon-image").ifNull { "Missing 'icon-image' for icon '$glyph'" }
+        val iconImage = ImageManagerImpl.image(iconImageName).ifNull { "This icon image doesn't exist: $iconImageName" }
+        val base = Component.text(glyph).font(iconImage.key())
+        section.getString("icon-color")?.toTextColor()?.let { base.color(it) } ?: base
+    } ?: Component.empty()
     private val duration = section.getInt("duration", 20).coerceAtLeast(1)
     private val interval = section.getInt("interval", 1).coerceAtLeast(1)
     private val showGlobalPlayer = section.getBoolean("show-global-player")
@@ -47,6 +54,7 @@ class DamageEffectImpl(section: ConfigurationSection) : DamageEffect {
     } ?: 0
 
     override fun image(): DamageImage = image
+    override fun icon(): Component = icon
     override fun duration(): Int = duration
     override fun interval(): Int = interval
     override fun showGlobalPlayer(): Boolean = showGlobalPlayer

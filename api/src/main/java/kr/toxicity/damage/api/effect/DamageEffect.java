@@ -37,6 +37,11 @@ public interface DamageEffect {
      */
     @NotNull DamageImage image();
 
+    /** Optional glyph rendered before the numeric damage in its own font. */
+    default @NotNull Component icon() {
+        return Component.empty();
+    }
+
     /**
      * Gets running duration of this effect
      * @return duration
@@ -160,7 +165,8 @@ public interface DamageEffect {
         display.frame(interval() + 1);
         display.billboard(billboard());
         display.text(Component.text(tb -> {
-            tb.content(toString(data.damage())).color(color()).font(image().key());
+            tb.append(icon());
+            tb.append(Component.text(toString(data.damage())).color(color()).font(image().key()));
             if (BetterDamage.inst().version().supportShadowColor()) tb.shadowColor(ShadowColor.shadowColor(shadowColor()));
         }).compact());
         var stream = Stream.of(data.player());

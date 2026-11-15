@@ -1,0 +1,5 @@
+valhallammo_icons:
+  file: valhallammo_damage_icons.png
+  # Private-use characters U+E200 through U+E20D, in left-to-right sprite order.
+  codepoints: "\uE200\uE201\uE202\uE203\uE204\uE205\uE206\uE207\uE208\uE209\uE20A\uE20B\uE20C\uE20D"
+  space: 0

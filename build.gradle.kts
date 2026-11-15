@@ -86,6 +86,7 @@ bukkitPluginYaml {
     author = "toxicity"
     description = "Provides simple damage skin for Minecraft Bukkit."
     softDepend = listOf(
+        "ValhallaMMO",
         "BetterModel",
         "MMOCore",
         "MMOItems",

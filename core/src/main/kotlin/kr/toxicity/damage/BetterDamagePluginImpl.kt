@@ -92,11 +92,12 @@ class BetterDamagePluginImpl : JavaPlugin(), BetterDamagePlugin {
     override fun onLoad() {
         BetterDamage.inst(this)
         managers.forEach(DamageManager::load)
-        if (!DATA_FOLDER.exists()) {
-            loadAssets("default") { path, stream ->
-                File(DATA_FOLDER, path).apply {
-                    parentFile.mkdirs()
-                }.outputStream().buffered().use { output ->
+        // Add newly bundled assets on updates without overwriting user-edited files.
+        loadAssets("default") { path, stream ->
+            val destination = File(DATA_FOLDER, path)
+            if (!destination.exists()) {
+                destination.parentFile.mkdirs()
+                destination.outputStream().buffered().use { output ->
                     stream.copyTo(output)
                 }
             }

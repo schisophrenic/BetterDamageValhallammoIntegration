@@ -3,6 +3,7 @@ package kr.toxicity.damage.skin
 import kr.toxicity.damage.api.effect.DamageEffect
 import kr.toxicity.damage.api.skin.DamageSkin
 import kr.toxicity.damage.api.trigger.DamageTriggerType
+import kr.toxicity.damage.compatibility.valhallammo.ValhallaMMOCompatibility
 import kr.toxicity.damage.manager.EffectManagerImpl
 import kr.toxicity.damage.manager.TriggerManagerImpl
 import kr.toxicity.damage.util.ifNull
@@ -23,6 +24,15 @@ class DamageSkinImpl(
             }.let { s ->
                 EffectManagerImpl.effect(s).ifNull {
                     "This effect doesn't exist: $s in effect $name"
+                }
+            }
+        }.toMutableMap().apply {
+            if (ValhallaMMOCompatibility.active) {
+                // User-defined mappings win; bundled type-specific icons cover all other skins.
+                ValhallaMMOCompatibility.TYPES.forEach { name ->
+                    val trigger = TriggerManagerImpl.type("valhallammo_$name")
+                    val effect = EffectManagerImpl.effect("valhallammo_$name")
+                    if (trigger != null && effect != null) putIfAbsent(trigger, effect)
                 }
             }
         }
