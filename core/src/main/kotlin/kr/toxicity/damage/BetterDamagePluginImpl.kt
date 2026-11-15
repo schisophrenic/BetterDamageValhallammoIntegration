@@ -12,7 +12,6 @@ import kr.toxicity.damage.api.scheduler.DamageScheduler
 import kr.toxicity.damage.api.util.HttpUtil
 import kr.toxicity.damage.api.util.MinecraftVersion
 import kr.toxicity.damage.compatibility.modelengine.CurrentModelEngineAdapter
-import kr.toxicity.damage.compatibility.modelengine.LegacyModelEngineAdapter
 import kr.toxicity.damage.config.PluginConfig
 import kr.toxicity.damage.manager.*
 import kr.toxicity.damage.scheduler.BukkitScheduler
@@ -135,8 +134,9 @@ class BetterDamagePluginImpl : JavaPlugin(), BetterDamagePlugin {
             runCatching {
                 @Suppress("DEPRECATION")
                 val version = ModelEngineVersion(it.description.version)
-                modelAdapter = if (version >= ModelEngineVersion.version_4_0_0) CurrentModelEngineAdapter() else LegacyModelEngineAdapter()
-                info("ModelEngine support enabled: $version")
+                modelAdapter = if (version >= ModelEngineVersion.version_4_0_0) CurrentModelEngineAdapter() else null
+                if (modelAdapter != null) info("ModelEngine support enabled: $version")
+                else warn("ModelEngine v3 adapter is unavailable in this beta; BetterDamage uses vanilla entity height.")
             }.onFailure { e ->
                 e.handle("Failed to load ModelEngine support.")
             }
