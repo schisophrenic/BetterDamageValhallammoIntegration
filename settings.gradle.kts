@@ -51,6 +51,5 @@ include(
     "nms:v26_R2",
     "nms:v26_R3",
 
-    "modelengine:legacy",
     "modelengine:current",
 )
