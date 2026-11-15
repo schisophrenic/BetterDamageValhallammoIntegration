@@ -1,5 +1,6 @@
 package kr.toxicity.damage.effect
 
+import kr.toxicity.damage.api.BetterDamage
 import kr.toxicity.damage.api.effect.DamageEffect
 import kr.toxicity.damage.api.effect.DamageEffectCounter
 import kr.toxicity.damage.api.equation.TEquation
@@ -20,6 +21,8 @@ class DamageEffectImpl(section: ConfigurationSection) : DamageEffect {
     private val image = section.getString("image")?.let {
         ImageManagerImpl.image(it).ifNull { "This image doesn't exist: $it" }
     } ?: DamageImage.NOT_SET
+    private val glyphText = section.getString("glyph", "") ?: ""
+    private val glyphTypeface = section.getString("glyph-font", "minecraft:default") ?: "minecraft:default"
     private val duration = section.getInt("duration", 20).coerceAtLeast(1)
     private val interval = section.getInt("interval", 1).coerceAtLeast(1)
     private val showGlobalPlayer = section.getBoolean("show-global-player")
@@ -46,6 +49,8 @@ class DamageEffectImpl(section: ConfigurationSection) : DamageEffect {
         }.getOrNull()
     } ?: 0
 
+    override fun glyph(): String = if (BetterDamage.inst().config().valhallaUseGlyphs()) glyphText else ""
+    override fun glyphFont(): String = glyphTypeface
     override fun image(): DamageImage = image
     override fun duration(): Int = duration
     override fun interval(): Int = interval
