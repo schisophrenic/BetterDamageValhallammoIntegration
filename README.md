@@ -45,6 +45,11 @@ dependencies {
 }
 ```
 
+## Documentation
+
+- 📖 **[ValhallaMMO configuration guide](docs/wiki/Configuration.md)** — complete options, skins, glyph fonts, healing indicators, examples, troubleshooting, and beta testing instructions.
+- [Wiki-style guide index](docs/wiki/Home.md)
+
 ## ValhallaMMO integration (optional, experimental)
 
 The fork supports ValhallaMMO custom damage categories through BetterDamage's existing renderer and selectable skins, without a hard compile dependency on ValhallaMMO. The bridge reads `CustomDamageType.getCustomType(EntityDamagedListener.getLastDamageCause(victim))` and ValhallaMMO's `getLastDamageTaken` with the Bukkit final-damage fallback. When enabled it suppresses BetterDamage's generic `bukkit_damage` hit trigger for the same event to avoid duplicate **BetterDamage** indicators. It does not automatically suppress ValhallaMMO's **own** native indicators; configure those separately (for example `dummies_only: true` in ValhallaMMO's main config if appropriate).
