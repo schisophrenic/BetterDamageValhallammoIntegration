@@ -8,3 +8,13 @@ skip-zero-damage: true
 default-effect: "null" #Default effect
 default-skin: "default_skin"
 merge-with-external-resources: true
+# Optional ValhallaMMO integration (requires installed and enabled ValhallaMMO).
+# Configure glyph text and fonts under effects/valhalla_effects.yml.
+valhalla-integration:
+  enabled: false
+  damage:
+    enabled: true
+  healing:
+    enabled: true
+  glyphs:
+    enabled: true
