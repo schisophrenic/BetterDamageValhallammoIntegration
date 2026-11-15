@@ -28,6 +28,16 @@ class BetterDamageConfigImpl(yaml: ConfigurationSection) : BetterDamageConfig {
     }
     private val mergeWithExternalResources = yaml.getBoolean("merge-with-external-resources", true)
 
+    private val valhallaEnabled = yaml.getBoolean("valhalla-integration.enabled", false)
+    private val valhallaDamage = yaml.getBoolean("valhalla-integration.damage.enabled", true)
+    private val valhallaHealing = yaml.getBoolean("valhalla-integration.healing.enabled", true)
+    private val valhallaGlyphs = yaml.getBoolean("valhalla-integration.glyphs.enabled", true)
+
+    override fun valhallaEnabled(): Boolean = valhallaEnabled
+    override fun valhallaDamageEnabled(): Boolean = valhallaDamage
+    override fun valhallaHealingEnabled(): Boolean = valhallaHealing
+    override fun valhallaUseGlyphs(): Boolean = valhallaGlyphs
+
     override fun debug(): Boolean = debug
     override fun namespace(): String = namespace
     override fun packPath(): String = packPath
