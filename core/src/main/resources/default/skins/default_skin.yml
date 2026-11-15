@@ -4,6 +4,21 @@
 default_skin:
   skins:
     bukkit_damage: default_effect
+    valhalla_fire: valhalla_fire
+    valhalla_magic: valhalla_magic
+    valhalla_projectile: valhalla_projectile
+    valhalla_explosion: valhalla_explosion
+    valhalla_poison: valhalla_poison
+    valhalla_falling: valhalla_falling
+    valhalla_melee: valhalla_melee
+    valhalla_bleed: valhalla_bleed
+    valhalla_freezing: valhalla_freezing
+    valhalla_lightning: valhalla_lightning
+    valhalla_bludgeoning: valhalla_bludgeoning
+    valhalla_radiant: valhalla_radiant
+    valhalla_necrotic: valhalla_necrotic
+    valhalla_other: valhalla_other
+    valhalla_healing: valhalla_healing
 
 # MythicLib default skin
 # mythiclib_damage: not-critical mythiclib damage trigger
