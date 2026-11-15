@@ -22,7 +22,8 @@ This plugin implements damage skin.
 
 ### Supported Plugins
 - BetterModel, ModelEngine - detect model's height  
-- MythicLib - support damage event  
+- MythicLib - support damage event
+- ValhallaMMO - displays each calculated damage type with its own colored, pixel-art icon  
 
 ### Platform
 - Spigot, Paper and Folia or fork of them.
@@ -44,3 +45,37 @@ dependencies {
     implementation("com.github.toxicity188:BetterDamage:Tag")
 }
 ```
+
+
+### ValhallaMMO damage types
+
+If ValhallaMMO is installed, BetterDamage hooks into ValhallaMMO's damage-indicator
+strategy to read its **actual calculated damage type and amount**, including
+independent bonus elemental hits. No changes to ValhallaMMO's damage calculations
+or combat balancing are made.
+
+Built-in visuals cover: Fire, Magic, Projectile, Explosion, Poison, Falling,
+Melee, Bleeding, Freezing, Lightning, Bludgeoning, Radiant, Necrotic, and Other.
+Each damage type uses its own 16x16 icon in the generated BetterDamage resource pack.
+You must deliver/merge that pack with the other resource packs used by your server.
+
+The files `plugins/BetterDamage/effects/valhallammo_effects.yml` and
+`plugins/BetterDamage/images/valhallammo_icons.yml` are installed automatically
+if missing, even when upgrading an existing server. Existing customizations are
+never overwritten. All skins gain default ValhallaMMO type mappings unless they
+specify their own `valhallammo_<type>` trigger override.
+
+To customize an icon, edit the matching `valhallammo_<type>` effect's
+`icon`, `icon-image`, `icon-color`, or damage `color` fields and reload
+BetterDamage. To disable a specific Valhalla indicator, remove its effect or
+configure an appropriate fallback in your skin. When the hook is unavailable,
+BetterDamage continues using its original Bukkit damage trigger.
+
+**Duplicate indicators:** when a Valhalla damage instance was rendered,
+the generic Bukkit trigger is suppressed for that target's immediate damage
+event. This also preserves the native indicator fallback for unhandled events.
+
+**Notes:** This integration uses ValhallaMMO's public damage-indicator
+interfaces via reflection so the build does not require a premium ValhallaMMO
+dependency. It needs in-server testing on Purpur 26.3, particularly for custom
+damage ticks, dummies and existing custom skins.

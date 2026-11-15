@@ -5,12 +5,16 @@ import kr.toxicity.damage.api.pack.PackAssets
 import kr.toxicity.damage.compatibility.craftengine.CraftEngineCompatibility
 import kr.toxicity.damage.compatibility.mythiclib.MythicLibCompatibility
 import kr.toxicity.damage.compatibility.nexo.NexoCompatibility
+import kr.toxicity.damage.compatibility.valhallammo.ValhallaMMOCompatibility
 import kr.toxicity.damage.util.info
 import org.bukkit.Bukkit
 
 object CompatibilityManagerImpl : CompatibilityManager {
 
     private val hookMap = mapOf(
+        "ValhallaMMO" to {
+            ValhallaMMOCompatibility()
+        },
         "MythicLib" to {
             MythicLibCompatibility()
         },
