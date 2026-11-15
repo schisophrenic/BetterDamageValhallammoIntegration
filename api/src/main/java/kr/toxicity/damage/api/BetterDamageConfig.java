@@ -73,4 +73,11 @@ public interface BetterDamageConfig {
      */
     boolean mergeWithExternalResources();
 
+    /** Optional ValhallaMMO damage-type and healing indicators. */
+    boolean valhallaEnabled();
+    boolean valhallaDamageEnabled();
+    boolean valhallaHealingEnabled();
+    boolean valhallaUseGlyphs();
+
+
 }
