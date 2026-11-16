@@ -27,5 +27,7 @@ object DamageSkinManagerImpl : DamageSkinManager {
                 it.handle("Unable to load this damage skin: $key")
             }
         }
+        // Effects and skins have now reloaded; check all Valhalla references.
+        CombatIndicatorBridge.validate()
     }
 }
