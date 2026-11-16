@@ -209,3 +209,120 @@ These settings are in the same `plugins/BetterDamage/config.yml` file:
 
 - [Beta release](https://github.com/schisophrenic/BetterDamageValhallammoIntegration/releases/tag/v2.2.0-valhalla-beta.1)
 - [BetterDamage fork repository](https://github.com/schisophrenic/BetterDamageValhallammoIntegration)
+
+---
+
+## 9. Beta 2: Advanced combat integration (experimental)
+
+The second beta extends the earlier damage/healing bridge with a prioritized ValhallaMMO `DamageIndicatorStrategy` adapter, post-hit health reconciliation, critical-effect variants, combat status messages, player preferences, damage aggregation, elite styles, PvP/PvE controls, and validation.
+
+> [!CAUTION]
+> The displayed applied-damage total is reconciled from health **plus absorption** after a short delay, so a hit that gets blocked or absorbed will not blindly show the raw Bukkit number. When multiple hits and other health changes happen in the same short window, exact per-type attribution may still be approximate. This is a beta, not a guarantee of perfect accounting for all ValhallaMMO mechanics.
+
+### Settings
+
+Append these settings to `plugins/BetterDamage/config.yml` and use `/bd reload` (or restart for initial installation):
+
+```yaml
+valhalla-integration:
+  enabled: true
+  damage:
+    enabled: true
+  healing:
+    enabled: true
+  glyphs:
+    enabled: true
+
+valhalla-combat:
+  aggregation:
+    enabled: true
+    window-ticks: 3
+  critical:
+    enabled: true
+  statuses:
+    enabled: true
+  elite:
+    enabled: true
+    high-level: 500
+  visibility:
+    outgoing: true
+    incoming: true
+    healing: true
+    statuses: true
+    pvp: true
+    pve: true
+  healing:
+    mob-healing-visible: true
+    mob-view-distance: 24
+  direct-healing:
+    enabled: true
+    max-players: 100
+    lifesteal-heuristic: true
+```
+
+| Setting | Behavior |
+| --- | --- |
+| `aggregation.enabled` | Group multiple damage ticks per mob/type/attacker within the same window, reducing visual spam. |
+| `aggregation.window-ticks` | Number of server ticks to gather damage and allow ValhallaMMO's delayed health changes to finish (2–40, default 3). |
+| `critical.enabled` | Use `valhalla_critical_<type>` effects on critical hits reported by the ValhallaMMO damage indicator strategy. |
+| `statuses.enabled` | Enable supported combat-result indicators: blocked, dodged, resisted, absorbed. |
+| `elite.enabled` | Use ValhallaEquipment's saved elite-mob marker to choose special styles when targeting an elite mob or receiving damage from one. |
+| `elite.high-level` | Minimum ValhallaEquipment mob level for `valhalla_elite_high`. |
+| `visibility.outgoing` | Show attacks dealt by a player. |
+| `visibility.incoming` | Show attacks received by a player. |
+| `visibility.healing` | Show applicable healing events and direct-health increases. |
+| `visibility.statuses` | Show block/dodge/resist/absorb feedback. |
+| `visibility.pvp` / `visibility.pve` | Allow indicators for the given combat mode. |
+| `healing.mob-healing-visible` | Let nearby players see mob healing events. |
+| `healing.mob-view-distance` | Distance in blocks for mob-healing visibility. |
+| `direct-healing.enabled` | Sample online player health for increases not delivered through Bukkit regain-health events. |
+| `direct-healing.max-players` | Maximum number of online players checked per sampling pass. |
+| `direct-healing.lifesteal-heuristic` | Classify direct healing shortly after a player dealt damage as *probable* life steal. This is a heuristic, **not** a guaranteed ValhallaMMO life-steal event. Disable it if you prefer generic healing indicators. |
+
+### New effect presets
+
+The file `plugins/BetterDamage/effects/valhalla_combat_effects.yml` contains the added effects:
+
+- `valhalla_critical_fire`, `valhalla_critical_melee`, etc. (14 variants).
+- `valhalla_blocked` and `valhalla_dodged` — label-only effects via `hide-number: true`.
+- `valhalla_resisted` and `valhalla_absorbed` — numeric combat-result effects.
+- `valhalla_regeneration` and `valhalla_lifesteal` — distinct healing styles.
+- `valhalla_elite` and `valhalla_elite_high` — level-based elite effects.
+
+Customize these effects like the original `valhalla_*` entries: glyph, glyph font, color, duration, animation, and number formatting. **Existing effect files are not overwritten.** The new effects are included in the bundled default skin; for customized skins, add their trigger mappings manually. The bridge can also find an effect with the same name as its trigger even if your skin has no mapping.
+
+### Player preference commands
+
+Players can change their own visibility without changing the global server configuration:
+
+```text
+/bd combat outgoing off
+/bd combat incoming on
+/bd combat healing off
+/bd combat statuses on
+/bd combat pvp off
+/bd combat pve on
+/bd combat elite off
+/bd combat glyphs on
+
+/bd combatstatus
+/bd combatreset
+```
+
+Changes persist in `plugins/BetterDamage/combat-preferences.yml` and survive restarts. `elite off` disables **elite styling**, not all damage against elite mobs. Player preferences cannot override globally disabled channels.
+
+### How native integration works
+
+When both ValhallaMMO and the bridge are enabled, BetterDamage inserts an implementation of ValhallaMMO's `DamageIndicatorStrategy` at the front of the strategy registry. This gives the fork native damage category and critical-hit information, avoids a duplicate ValhallaMMO floating number when the hook is active, and retains training-dummy damage-nullification behavior. It waits for ValhallaMMO's delayed health update, then reconciles the health + absorption change and merges close-together hits. With the bridge disabled, ValhallaMMO's normal native strategy remains available.
+
+If the native strategy API cannot be loaded, the fork attempts a Bukkit event fallback. **This fallback is not guaranteed to show precise final ValhallaMMO custom damage**, and an indicator conflict is possible; check console messages.
+
+**Combat result limitations:** A `DODGED` label uses ValhallaMMO's actual `EntityDodgeAttackEvent`, where available; `BLOCKED` uses a shield-blocking player and canceled/zero-damage hit; `RESISTED` depends on the mitigation amount passed by ValhallaMMO's strategy; `ABSORBED` depends on absorption-heart changes. Those results are deliberately not inferred from arbitrary canceled events or unknown custom plugin effects.
+
+### Reload and troubleshooting
+
+`/bd reload` refreshes the combat settings, glyph/effect definitions, and player preferences. The plugin validates installed effect names, font-key syntax, and status effects that hide numbers without a glyph. Restart the server if a new native plugin integration wasn't available when BetterDamage first loaded.
+
+**Suggested beta tests:** verify critical melee and elemental hits; delayed ValhallaMMO damage; PvP and PvE separately; shield blocking and dodge perks; poison/bleed aggregation; capped absorption and one-shot protection; regeneration and direct healing; optional elite mob styling; each preference switch; and reload after deliberately using an invalid glyph-font key. Also test the bridge disabled to confirm original indicators remain usable.
+
+**Rollback:** set `valhalla-integration.enabled: false` and reload/restart; if needed, restore the previous BetterDamage JAR and backed-up settings.
