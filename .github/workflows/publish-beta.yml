@@ -24,7 +24,7 @@ jobs:
           set -euo pipefail
           jar="build/libs/BetterDamage-2.2.0-valhalla-beta.2.jar"
           test -s "$jar"
-          jar tf "$jar" | grep -q 'kr/toxicity/damage/manager/CombatIndicatorBridge.class'
+          jar tf "$jar" | grep 'kr/toxicity/damage/manager/CombatIndicatorBridge.class'
           echo "Verified: $jar"
       - name: Publish prerelease with beta warning
         env:
