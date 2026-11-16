@@ -18,3 +18,31 @@ valhalla-integration:
     enabled: true
   glyphs:
     enabled: true
+
+# Advanced optional ValhallaMMO combat indicators, only used when
+# valhalla-integration.enabled: true. Always test on a backup server.
+valhalla-combat:
+  aggregation:
+    enabled: true
+    window-ticks: 3           # 2-40; allows Valhalla's delayed health update
+  critical:
+    enabled: true
+  statuses:
+    enabled: true             # BLOCKED, DODGED, RESISTED, ABSORBED
+  elite:
+    enabled: true
+    high-level: 500           # More prominent elite indicators above this level
+  visibility:
+    outgoing: true            # Damage dealt to mobs/players
+    incoming: true            # Damage the player takes
+    healing: true
+    statuses: true
+    pvp: true
+    pve: true
+  healing:
+    mob-healing-visible: true # Healing of mobs near players
+    mob-view-distance: 24
+  direct-healing:
+    enabled: true             # Sample online players for setHealth healing
+    max-players: 100
+    lifesteal-heuristic: true # Heuristic: direct heal within 600ms of dealing damage
