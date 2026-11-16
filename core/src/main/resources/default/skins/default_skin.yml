@@ -19,6 +19,29 @@ default_skin:
     valhalla_necrotic: valhalla_necrotic
     valhalla_other: valhalla_other
     valhalla_healing: valhalla_healing
+    valhalla_blocked: valhalla_blocked
+    valhalla_dodged: valhalla_dodged
+    valhalla_resisted: valhalla_resisted
+    valhalla_absorbed: valhalla_absorbed
+    valhalla_regeneration: valhalla_regeneration
+    valhalla_lifesteal: valhalla_lifesteal
+    valhalla_critical: valhalla_critical
+    valhalla_elite: valhalla_elite
+    valhalla_elite_high: valhalla_elite_high
+    valhalla_critical_fire: valhalla_critical_fire
+    valhalla_critical_magic: valhalla_critical_magic
+    valhalla_critical_projectile: valhalla_critical_projectile
+    valhalla_critical_explosion: valhalla_critical_explosion
+    valhalla_critical_poison: valhalla_critical_poison
+    valhalla_critical_falling: valhalla_critical_falling
+    valhalla_critical_melee: valhalla_critical_melee
+    valhalla_critical_bleed: valhalla_critical_bleed
+    valhalla_critical_freezing: valhalla_critical_freezing
+    valhalla_critical_lightning: valhalla_critical_lightning
+    valhalla_critical_bludgeoning: valhalla_critical_bludgeoning
+    valhalla_critical_radiant: valhalla_critical_radiant
+    valhalla_critical_necrotic: valhalla_critical_necrotic
+    valhalla_critical_other: valhalla_critical_other
 
 # MythicLib default skin
 # mythiclib_damage: not-critical mythiclib damage trigger
