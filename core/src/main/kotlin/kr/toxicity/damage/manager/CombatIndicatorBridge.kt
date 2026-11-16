@@ -141,6 +141,20 @@ object CombatIndicatorBridge : Listener {
         for (name in effectNames) {
             if (effects.effect(name) == null) issues += "missing effect: $name"
         }
+        // Validate every bundled/existing Valhalla glyph font before rendering it.
+        val validFont = Regex("[a-z0-9_.-]+:[a-z0-9_./-]+")
+        for (name in listOf("valhalla_effects.yml", "valhalla_combat_effects.yml")) {
+            val source = File(PLUGIN.dataFolder, "effects/$name")
+            if (!source.exists()) continue
+            val content = YamlConfiguration.loadConfiguration(source)
+            for (entry in content.getKeys(false)) {
+                val section = content.getConfigurationSection(entry) ?: continue
+                val font = section.getString("glyph-font", "minecraft:default") ?: "minecraft:default"
+                if (!validFont.matches(font)) issues += "invalid glyph-font $font in $name: $entry"
+                if (section.getBoolean("hide-number", false) && section.getString("glyph").isNullOrBlank())
+                    issues += "$name: $entry hides numbers without supplying display text"
+            }
+        }
         for (issue in issues) PLUGIN.logger.warning("[Valhalla indicator beta] $issue")
         if (issues.isEmpty()) PLUGIN.logger.info("Valhalla indicator effects/config validation passed.")
         PLUGIN.logger.info(
@@ -306,7 +320,8 @@ object CombatIndicatorBridge : Listener {
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = false)
     fun onBlockedDamage(event: EntityDamageEvent) {
-        if (!damage() || !flag("statuses.enabled", true) || !event.isCancelled) return
+        if (!damage() || !flag("statuses.enabled", true)) return
+        if (!event.isCancelled && event.finalDamage > 0.05) return
         val victim = event.entity as? Player ?: return
         if (!victim.isBlocking) return
         val source = (event as? EntityDamageByEntityEvent)?.damager?.let(::resolveSource)
@@ -337,8 +352,12 @@ object CombatIndicatorBridge : Listener {
             if (!target.isValid) return@Runnable
             val actual = (target.health - before).coerceAtLeast(0.0).coerceAtMost(amount)
             if (actual < 0.05) return@Runnable
-            val key = if (reason.contains("REGEN") || reason == "SATIATED") "valhalla_regeneration"
-                else "valhalla_healing"
+            val recent = System.currentTimeMillis() - (recentAttack[target.uniqueId] ?: 0) in 0..600L
+            val key = when {
+                reason == "CUSTOM" && recent && flag("direct-healing.lifesteal-heuristic", true) -> "valhalla_lifesteal"
+                reason.contains("REGEN") || reason == "SATIATED" -> "valhalla_regeneration"
+                else -> "valhalla_healing"
+            }
             heal(target, actual, key)
             healthSnapshot[target.uniqueId] = target.health
         }, 2L)
