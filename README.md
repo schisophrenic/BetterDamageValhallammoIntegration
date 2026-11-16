@@ -87,3 +87,13 @@ For resource-pack glyphs, change `glyph` to your desired character (including Un
 The default skin maps all `valhalla_*` triggers to these effects. Existing user-edited `default_skin.yml` files are preserved: manually merge the new mappings, or create a separate skin. For skins that do not specify the mappings, the integration tries the corresponding named effect as a fallback. New effect preset files are copied into existing BetterDamage folders without overwriting user edits.
 
 This is **not** a claim that native custom damage is reproduced exactly in every case. It needs server testing on Purpur 26.3, especially ValhallaMMO's delayed health updates, non-player damage sources, crit styling, and interactions with existing native damage indicators. All new switches default OFF until explicitly enabled. When disabled, vanilla BetterDamage behavior remains unchanged.
+
+### Beta 2: native strategy combat indicator overhaul
+
+**⚠️ EXPERIMENTAL.** Back up your server and use a test server first. Beta 2 introduces ValhallaMMO's native damage-strategy hook, health/absorption reconciliation, independent critical-hit effects, shield/dodge/resist/absorption labels, player and mob healing displays (including *heuristic* life-steal detection), configurable PvP/PvE visibility, per-player preferences, damage-over-time aggregation, level-based ValhallaEquipment elite styling, and safe config reload/validation. The accuracy of simultaneous hits and unrelated healing in the same time window is not guaranteed; validate real gameplay before production.
+
+Enable with `valhalla-integration.enabled: true` in `plugins/BetterDamage/config.yml`. Advanced options are under `valhalla-combat`, detailed in [the full configuration guide](docs/wiki/Configuration.md). New effects are in `plugins/BetterDamage/effects/valhalla_combat_effects.yml`; existing skin files are **not overwritten**.
+
+Players can use `/bd combat <outgoing|incoming|healing|statuses|pvp|pve|elite|glyphs> <on|off>`, `/bd combatstatus`, and `/bd combatreset`. Preferences persist in `plugins/BetterDamage/combat-preferences.yml`.
+
+[Beta 2 release](https://github.com/schisophrenic/BetterDamageValhallammoIntegration/releases/tag/v2.2.0-valhalla-beta.2).
