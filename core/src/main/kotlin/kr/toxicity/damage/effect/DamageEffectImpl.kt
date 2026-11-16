@@ -50,7 +50,7 @@ class DamageEffectImpl(section: ConfigurationSection) : DamageEffect {
         }.getOrNull()
     } ?: 0
 
-    override fun glyph(): String = if (BetterDamage.inst().config().valhallaUseGlyphs()) glyphText else ""
+    override fun glyph(): String = if (noNumber || BetterDamage.inst().config().valhallaUseGlyphs()) glyphText else ""
     override fun hideNumber(): Boolean = noNumber
     override fun glyphFont(): String = glyphTypeface
     override fun image(): DamageImage = image
