@@ -119,6 +119,8 @@ public interface DamageEffect {
     /** Optional glyph prefix, rendered using an independent font from damage digits. */
     default @NotNull String glyph() { return ""; }
     default @NotNull String glyphFont() { return "minecraft:default"; }
+    /** For block/dodge status effects that display text instead of a number. */
+    default boolean hideNumber() { return false; }
 
     /**
      * Parses this damage to string
@@ -164,7 +166,7 @@ public interface DamageEffect {
         var display = BetterDamage.inst().nms().create(initialLocation);
         display.frame(interval() + 1);
         display.billboard(billboard());
-        Component number = Component.text(toString(data.damage())).color(color()).font(image().key());
+        Component number = Component.text(hideNumber() ? "" : toString(data.damage())).color(color()).font(image().key());
         Component displayText = number;
         if (!glyph().isEmpty()) {
             Component symbol = Component.text(glyph()).color(color()).font(Key.key(glyphFont()));
