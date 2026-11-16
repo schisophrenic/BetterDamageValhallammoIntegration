@@ -169,7 +169,10 @@ public interface DamageEffect {
         Component number = Component.text(hideNumber() ? "" : toString(data.damage())).color(color()).font(image().key());
         Component displayText = number;
         if (data.useGlyphs() && !glyph().isEmpty()) {
-            Component symbol = Component.text(glyph()).color(color()).font(Key.key(glyphFont()));
+            Key font;
+            try { font = Key.key(glyphFont()); }
+            catch (IllegalArgumentException invalidFont) { font = Key.key("minecraft:default"); }
+            Component symbol = Component.text(glyph()).color(color()).font(font);
             displayText = symbol.append(number);
         }
         if (BetterDamage.inst().version().supportShadowColor())
