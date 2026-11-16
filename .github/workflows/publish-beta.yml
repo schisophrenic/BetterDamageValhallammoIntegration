@@ -17,48 +17,59 @@ jobs:
           java-version: '21'
       - uses: gradle/actions/setup-gradle@v4
       - name: Build release JAR (failure blocks publication)
-        run: bash ./gradlew clean shadowJar --no-daemon --stacktrace
+        run: bash ./gradlew clean build --no-daemon --stacktrace
       - name: Verify shaded JAR
         shell: bash
         run: |
           set -euo pipefail
-          find build/libs -maxdepth 1 -name '*.jar' -type f -print
-          test "$(find build/libs -maxdepth 1 -name '*.jar' -type f | wc -l)" -ge 1
+          jar="build/libs/BetterDamage-2.2.0-valhalla-beta.2.jar"
+          test -s "$jar"
+          jar tf "$jar" | grep -q 'kr/toxicity/damage/manager/CombatIndicatorBridge.class'
+          echo "Verified: $jar"
       - name: Publish prerelease with beta warning
         env:
           GH_TOKEN: ${{ github.token }}
         shell: bash
         run: |
           set -euo pipefail
-          tag=v2.2.0-valhalla-beta.1
+          tag=v2.2.0-valhalla-beta.2
           cat > beta-notes.md <<'NOTES'
           # ⚠️ BETA TEST RELEASE — NOT STABLE
 
           **Experimental ValhallaMMO + BetterDamage integration for Minecraft / Purpur 26.3.**
           This build has not been verified on a live server. **Back up your server, world, and plugin configs before installing.** Use it on a test server first.
 
-          ### Included
-          - Optional ValhallaMMO damage-category indicators, with per-type effects.
-          - Optional player-healing indicators.
-          - Configurable damage glyphs and resource-pack font IDs.
-          - Integration is **disabled by default**, and generic BetterDamage indicators remain available.
-          - Modern ModelEngine v4 support is retained. Legacy ModelEngine v3 support is disabled in this beta due to an incompatible dependency.
+          ### Included — Beta 2
+          - Reconciled applied damage: native ValhallaMMO indicator strategy and delayed health/absorption comparison.
+          - Critical hits: category-specific critical glyph/color/animation effects.
+          - Duplicate prevention: ValhallaMMO native floating numbers are bypassed while the bridge is active.
+          - Healing: Bukkit player/mob heal events plus direct player-health sampling.
+          - Block, dodge, resistance and absorption feedback where reliably detected.
+          - Per-player display settings with /bd combat, /bd combatstatus, /bd combatreset.
+          - Damage-over-time aggregation grouped by category and attacker.
+          - Elite mob styling using ValhallaEquipment persistent metadata and levels.
+          - Incoming/outgoing, PvP/PvE, healing, status and glyph visibility controls.
+          - Config reload validation for missing effects and malformed font keys.
+          - Original BetterDamage features and ModelEngine v4 compatibility are retained.
+          - Legacy ModelEngine v3 support is unavailable due to an incompatible dependency.
+          - The new integration remains DISABLED by default until explicitly enabled.
 
           ### Known limitations / testing required
-          - Custom damage value and timing (including ValhallaMMO delayed damage) may need adjustments.
-          - Healing trigger handles Bukkit player healing, not all plugin-driven health changes.
-          - ValhallaMMO's native indicator may need disabling separately to prevent visual duplication.
-          - Existing BetterDamage skin configurations may need manually merging the new `valhalla_*` entries.
-          - Glyph appearance requires an appropriate installed resource pack/font.
-          - **Do not use as a production release until you've tested it.**
+          - Multiple simultaneous damage sources or healing within one window may cause approximate per-type allocation.
+          - Life-steal detection from direct health increases is a HEURISTIC, not a dedicated ValhallaMMO event.
+          - Other plugins' custom healing and canceled events may not be detected.
+          - If the ValhallaMMO native strategy hook is unavailable, the Bukkit fallback is less accurate.
+          - Existing BetterDamage skins may need manually merging the new valhalla_* entries.
+          - Glyph appearance requires the proper installed resource pack and font.
+          - DO NOT USE IN PRODUCTION UNTIL TESTED. Keep a backup of Beta 1 and configs.
 
-          Enable using `valhalla-integration.enabled: true` in BetterDamage's config after installation; restart and test on Purpur 26.3.
-
-          Report errors with your server version and startup/stack-trace logs to this repository's Issues page.
+          Enable with valhalla-integration.enabled: true in BetterDamage/config.yml and configure valhalla-combat.
+          See the configuration guide: https://github.com/schisophrenic/BetterDamageValhallammoIntegration/blob/master/docs/wiki/Configuration.md
+          Report errors, server version and logs to this repository's Issues page.
           NOTES
           if gh release view "$tag" >/dev/null 2>&1; then
-            gh release upload "$tag" build/libs/*.jar --clobber
+            gh release upload "$tag" build/libs/BetterDamage-2.2.0-valhalla-beta.2.jar --clobber
             gh release edit "$tag" --prerelease --notes-file beta-notes.md
           else
-            gh release create "$tag" build/libs/*.jar --target "$GITHUB_SHA" --title "BetterDamage + ValhallaMMO v2.2.0 Beta 1 ⚠️" --prerelease --notes-file beta-notes.md
+            gh release create "$tag" build/libs/BetterDamage-2.2.0-valhalla-beta.2.jar --target "$GITHUB_SHA" --title "BetterDamage + ValhallaMMO v2.2.0 Beta 2 ⚠️" --prerelease --notes-file beta-notes.md
           fi
