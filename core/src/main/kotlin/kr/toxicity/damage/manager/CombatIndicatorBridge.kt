@@ -281,16 +281,22 @@ object CombatIndicatorBridge : Listener {
         val actuallyApplied = (before - after).coerceAtLeast(0.0)
         val totalRequested = batch.hits.sumOf { it.amount }
         val factor = if (totalRequested > 0) (actuallyApplied / totalRequested).coerceIn(0.0, 1.0) else 0.0
-        for (hit in batch.hits) {
-            val amount = if (hit.dummy) hit.amount else hit.amount * factor
+        // One indicator per damage category/critical status/attacker, even if a
+        // poison or bleed effect ticks many times in the aggregation window.
+        val grouped = batch.hits.groupBy {
+            Triple(it.category, it.critical, it.attacker?.uniqueId)
+        }
+        for (hits in grouped.values) {
+            val first = hits.first()
+            val amount = hits.sumOf { if (it.dummy) it.amount else it.amount * factor }
             if (amount >= 0.05) {
-                val critical = hit.critical && flag("critical.enabled", true)
-                val key = if (critical) "valhalla_critical_${hit.category}" else "valhalla_${hit.category}"
-                dispatch(victim, hit.attacker, key, amount, false)
+                val critical = first.critical && flag("critical.enabled", true)
+                val key = if (critical) "valhalla_critical_${first.category}" else "valhalla_${first.category}"
+                dispatch(victim, first.attacker, key, amount, false)
             }
-            if (flag("statuses.enabled", true)) {
-                if (hit.mitigated < -0.05) dispatchStatus(victim, hit.attacker, "valhalla_resisted", -hit.mitigated)
-            }
+            val reduced = hits.sumOf { (-it.mitigated).coerceAtLeast(0.0) }
+            if (flag("statuses.enabled", true) && reduced > 0.05)
+                dispatchStatus(victim, first.attacker, "valhalla_resisted", reduced)
         }
         val absorbed = (batch.initialAbsorption - victim.absorptionAmount).coerceAtLeast(0.0)
         if (flag("statuses.enabled", true) && absorbed > 0.05) {
@@ -381,16 +387,17 @@ object CombatIndicatorBridge : Listener {
         val mode = if (source != null && victim is Player && source.uniqueId != victim.uniqueId) "pvp" else "pve"
         val elite = flag("elite.enabled", true) && (elite(victim) || (attacker is LivingEntity && elite(attacker)))
         val tier = when {
-            !elite -> key
-            key.startsWith("valhalla_critical_") -> "valhalla_elite_high"
+            !elite || status -> key
             level(victim) >= int("elite.high-level", 500) -> "valhalla_elite_high"
             else -> "valhalla_elite"
         }
         if (source != null) {
-            show(source, victim, amount, tier, if (status) "statuses" else "outgoing", victim, attacker, mode)
+            val styled = if (CombatPreferences.enabled(source, "elite")) tier else key
+            show(source, victim, amount, styled, if (status) "statuses" else "outgoing", victim, attacker, mode)
         }
         if (victim is Player && victim.uniqueId != source?.uniqueId) {
-            show(victim, victim, amount, tier, if (status) "statuses" else "incoming", victim, attacker, mode)
+            val styled = if (CombatPreferences.enabled(victim, "elite")) tier else key
+            show(victim, victim, amount, styled, if (status) "statuses" else "incoming", victim, attacker, mode)
         }
     }
 
@@ -412,8 +419,6 @@ object CombatIndicatorBridge : Listener {
         if (direction != "healing") {
             if (!flag("visibility.$mode", true) || !CombatPreferences.enabled(viewer, mode)) return
         }
-        if (effectKey.startsWith("valhalla_elite") &&
-            (!flag("elite.enabled", true) || !CombatPreferences.enabled(viewer, "elite"))) return
         val cfg = BetterDamage.inst().config()
         if (cfg.skipZeroDamage() && amount < 0.5 && direction != "statuses") return
         val trigger = TriggerManagerImpl.type(effectKey) ?: DamageTriggerType(effectKey)
