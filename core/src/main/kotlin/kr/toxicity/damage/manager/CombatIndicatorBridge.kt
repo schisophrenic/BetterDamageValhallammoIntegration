@@ -423,6 +423,6 @@ object CombatIndicatorBridge : Listener {
         val effect = chosen ?: cfg.defaultSkin()?.effectMap()?.get(trigger)
             ?: better.effectManager().effect(effectKey)
             ?: return
-        effect.play(DamageEffectData(viewer, target, amount))
+        effect.play(DamageEffectData(viewer, target, amount, CombatPreferences.enabled(viewer, "glyphs")))
     }
 }
