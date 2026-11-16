@@ -168,7 +168,7 @@ public interface DamageEffect {
         display.billboard(billboard());
         Component number = Component.text(hideNumber() ? "" : toString(data.damage())).color(color()).font(image().key());
         Component displayText = number;
-        if (!glyph().isEmpty()) {
+        if (data.useGlyphs() && !glyph().isEmpty()) {
             Component symbol = Component.text(glyph()).color(color()).font(Key.key(glyphFont()));
             displayText = symbol.append(number);
         }
