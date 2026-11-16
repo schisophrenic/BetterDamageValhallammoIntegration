@@ -83,6 +83,29 @@ object CommandManagerImpl : CommandManager {
                     .handler(::remove)
             }
             create(
+                "combat",
+                "Set personal ValhallaMMO combat indicator channels."
+            ) {
+                senderType(Player::class.java)
+                    .required("channel", stringParser(), blockingStrings { _, _ -> CombatPreferences.allowedChannels().sorted() })
+                    .required("state", stringParser(), blockingStrings { _, _ -> listOf("on", "off") })
+                    .handler(::combat)
+            }
+            create(
+                "combatstatus",
+                "Show your combat indicator preferences."
+            ) {
+                senderType(Player::class.java)
+                    .handler(::combatStatus)
+            }
+            create(
+                "combatreset",
+                "Restore your default combat indicator preferences."
+            ) {
+                senderType(Player::class.java)
+                    .handler(::combatReset)
+            }
+            create(
                 "info",
                 "Infos some player's data.",
                 "i"
@@ -155,4 +178,35 @@ object CommandManagerImpl : CommandManager {
             sender.info("--------------------")
         }
     }
+    private fun combat(ctx: CommandContext<Player>) {
+        val player = ctx.sender()
+        val channel = ctx.get<String>("channel").lowercase()
+        val state = ctx.get<String>("state").lowercase()
+        if (state !in setOf("on", "off")) {
+            player.sendMessage("Usage: /bd combat <channel> <on|off>")
+            return
+        }
+        try {
+            player.sendMessage(CombatPreferences.set(player, channel, state == "on"))
+        } catch (e: Exception) {
+            PLUGIN.logger.warning("Failed to save BetterDamage combat preference: ${e.message}")
+            player.sendMessage("Could not save combat preferences; check server logs.")
+        }
+    }
+
+    private fun combatStatus(ctx: CommandContext<Player>) {
+        val player = ctx.sender()
+        player.sendMessage("Combat indicators: ${CombatPreferences.status(player)}")
+    }
+
+    private fun combatReset(ctx: CommandContext<Player>) {
+        val player = ctx.sender()
+        try {
+            player.sendMessage(CombatPreferences.reset(player))
+        } catch (e: Exception) {
+            PLUGIN.logger.warning("Failed to reset BetterDamage combat preferences: ${e.message}")
+            player.sendMessage("Could not reset combat preferences; check server logs.")
+        }
+    }
+
 }
