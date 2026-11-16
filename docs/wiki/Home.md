@@ -8,6 +8,6 @@
 
 ## Downloads
 
-- [v2.2.0 Valhalla Beta 1 prerelease](https://github.com/schisophrenic/BetterDamageValhallammoIntegration/releases/tag/v2.2.0-valhalla-beta.1)
+- [v2.2.0 Valhalla Beta 2 prerelease](https://github.com/schisophrenic/BetterDamageValhallammoIntegration/releases/tag/v2.2.0-valhalla-beta.2)
 
 The contents of this `docs/wiki` folder are formatted for GitHub Wiki and are also viewable directly in the source repository.
