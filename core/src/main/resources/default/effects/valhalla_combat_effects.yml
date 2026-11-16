@@ -1,0 +1,535 @@
+# New ValhallaMMO combat indicators for BetterDamage beta 2.
+# These effects use the same BetterDamage renderer and can be edited independently.
+# 'hide-number' supports labels such as BLOCKED and DODGED.
+# Set 'glyph-font' to any valid Minecraft font key for resource-pack glyphs.
+
+valhalla_blocked:
+  image: default_image
+  glyph: "BLOCKED"
+  glyph-font: "minecraft:default"
+  hide-number: true
+  color: "#80B9F5"
+  duration: 24
+  interval: 2
+  show-global-player: false
+  number-format: "#.#"
+  transformation:
+    position:
+      x: 0
+      y: 1.8sin(t / 48 * pi)
+      z: 0
+    rotation:
+      x: 40(r - 0.5)
+      y: 40(r - 0.5)
+      z: 0
+    scale:
+      x: 1.15cos(t / 48 * pi)
+      y: 1.15cos(t / 48 * pi)
+      z: 1.15cos(t / 48 * pi)
+
+valhalla_dodged:
+  image: default_image
+  glyph: "DODGED"
+  glyph-font: "minecraft:default"
+  hide-number: true
+  color: "#B6F2A1"
+  duration: 24
+  interval: 2
+  show-global-player: false
+  number-format: "#.#"
+  transformation:
+    position:
+      x: 0
+      y: 1.8sin(t / 48 * pi)
+      z: 0
+    rotation:
+      x: 40(r - 0.5)
+      y: 40(r - 0.5)
+      z: 0
+    scale:
+      x: 1.15cos(t / 48 * pi)
+      y: 1.15cos(t / 48 * pi)
+      z: 1.15cos(t / 48 * pi)
+
+valhalla_resisted:
+  image: default_image
+  glyph: "✧ RESIST"
+  glyph-font: "minecraft:default"
+  color: "#C0A2F8"
+  duration: 24
+  interval: 2
+  show-global-player: false
+  number-format: "#.#"
+  transformation:
+    position:
+      x: 0
+      y: 1.8sin(t / 48 * pi)
+      z: 0
+    rotation:
+      x: 40(r - 0.5)
+      y: 40(r - 0.5)
+      z: 0
+    scale:
+      x: 1.15cos(t / 48 * pi)
+      y: 1.15cos(t / 48 * pi)
+      z: 1.15cos(t / 48 * pi)
+
+valhalla_absorbed:
+  image: default_image
+  glyph: "✹ ABSORB"
+  glyph-font: "minecraft:default"
+  color: "#A7E5FF"
+  duration: 24
+  interval: 2
+  show-global-player: false
+  number-format: "#.#"
+  transformation:
+    position:
+      x: 0
+      y: 1.8sin(t / 48 * pi)
+      z: 0
+    rotation:
+      x: 40(r - 0.5)
+      y: 40(r - 0.5)
+      z: 0
+    scale:
+      x: 1.15cos(t / 48 * pi)
+      y: 1.15cos(t / 48 * pi)
+      z: 1.15cos(t / 48 * pi)
+
+valhalla_regeneration:
+  image: default_image
+  glyph: "+"
+  glyph-font: "minecraft:default"
+  color: "#69EBAD"
+  duration: 24
+  interval: 2
+  show-global-player: false
+  number-format: "#.#"
+  transformation:
+    position:
+      x: 0
+      y: 1.8sin(t / 48 * pi)
+      z: 0
+    rotation:
+      x: 40(r - 0.5)
+      y: 40(r - 0.5)
+      z: 0
+    scale:
+      x: 1.15cos(t / 48 * pi)
+      y: 1.15cos(t / 48 * pi)
+      z: 1.15cos(t / 48 * pi)
+
+valhalla_lifesteal:
+  image: default_image
+  glyph: "♥"
+  glyph-font: "minecraft:default"
+  color: "#E66379"
+  duration: 24
+  interval: 2
+  show-global-player: false
+  number-format: "#.#"
+  transformation:
+    position:
+      x: 0
+      y: 1.8sin(t / 48 * pi)
+      z: 0
+    rotation:
+      x: 40(r - 0.5)
+      y: 40(r - 0.5)
+      z: 0
+    scale:
+      x: 1.15cos(t / 48 * pi)
+      y: 1.15cos(t / 48 * pi)
+      z: 1.15cos(t / 48 * pi)
+
+valhalla_critical:
+  image: default_image
+  glyph: "✦ CRIT"
+  glyph-font: "minecraft:default"
+  color: "#FFE47A"
+  duration: 24
+  interval: 2
+  show-global-player: false
+  number-format: "#.#"
+  transformation:
+    position:
+      x: 0
+      y: 1.8sin(t / 48 * pi)
+      z: 0
+    rotation:
+      x: 40(r - 0.5)
+      y: 40(r - 0.5)
+      z: 0
+    scale:
+      x: 1.15cos(t / 48 * pi)
+      y: 1.15cos(t / 48 * pi)
+      z: 1.15cos(t / 48 * pi)
+
+valhalla_elite:
+  image: default_image
+  glyph: "✦ ELITE"
+  glyph-font: "minecraft:default"
+  color: "#D6A0FF"
+  duration: 24
+  interval: 2
+  show-global-player: false
+  number-format: "#.#"
+  transformation:
+    position:
+      x: 0
+      y: 1.8sin(t / 48 * pi)
+      z: 0
+    rotation:
+      x: 40(r - 0.5)
+      y: 40(r - 0.5)
+      z: 0
+    scale:
+      x: 1.15cos(t / 48 * pi)
+      y: 1.15cos(t / 48 * pi)
+      z: 1.15cos(t / 48 * pi)
+
+valhalla_elite_high:
+  image: default_image
+  glyph: "✦ ELITE+"
+  glyph-font: "minecraft:default"
+  color: "#FFBD5E"
+  duration: 24
+  interval: 2
+  show-global-player: false
+  number-format: "#.#"
+  transformation:
+    position:
+      x: 0
+      y: 1.8sin(t / 48 * pi)
+      z: 0
+    rotation:
+      x: 40(r - 0.5)
+      y: 40(r - 0.5)
+      z: 0
+    scale:
+      x: 1.15cos(t / 48 * pi)
+      y: 1.15cos(t / 48 * pi)
+      z: 1.15cos(t / 48 * pi)
+
+valhalla_critical_fire:
+  image: default_image
+  glyph: "✦ CRIT"
+  glyph-font: "minecraft:default"
+  color: "#FF7440"
+  duration: 24
+  interval: 2
+  show-global-player: false
+  number-format: "#.#"
+  transformation:
+    position:
+      x: 0
+      y: 1.8sin(t / 48 * pi)
+      z: 0
+    rotation:
+      x: 40(r - 0.5)
+      y: 40(r - 0.5)
+      z: 0
+    scale:
+      x: 1.15cos(t / 48 * pi)
+      y: 1.15cos(t / 48 * pi)
+      z: 1.15cos(t / 48 * pi)
+
+valhalla_critical_magic:
+  image: default_image
+  glyph: "✦ CRIT"
+  glyph-font: "minecraft:default"
+  color: "#BC75F5"
+  duration: 24
+  interval: 2
+  show-global-player: false
+  number-format: "#.#"
+  transformation:
+    position:
+      x: 0
+      y: 1.8sin(t / 48 * pi)
+      z: 0
+    rotation:
+      x: 40(r - 0.5)
+      y: 40(r - 0.5)
+      z: 0
+    scale:
+      x: 1.15cos(t / 48 * pi)
+      y: 1.15cos(t / 48 * pi)
+      z: 1.15cos(t / 48 * pi)
+
+valhalla_critical_projectile:
+  image: default_image
+  glyph: "✦ CRIT"
+  glyph-font: "minecraft:default"
+  color: "#EAA272"
+  duration: 24
+  interval: 2
+  show-global-player: false
+  number-format: "#.#"
+  transformation:
+    position:
+      x: 0
+      y: 1.8sin(t / 48 * pi)
+      z: 0
+    rotation:
+      x: 40(r - 0.5)
+      y: 40(r - 0.5)
+      z: 0
+    scale:
+      x: 1.15cos(t / 48 * pi)
+      y: 1.15cos(t / 48 * pi)
+      z: 1.15cos(t / 48 * pi)
+
+valhalla_critical_explosion:
+  image: default_image
+  glyph: "✦ CRIT"
+  glyph-font: "minecraft:default"
+  color: "#FFB74D"
+  duration: 24
+  interval: 2
+  show-global-player: false
+  number-format: "#.#"
+  transformation:
+    position:
+      x: 0
+      y: 1.8sin(t / 48 * pi)
+      z: 0
+    rotation:
+      x: 40(r - 0.5)
+      y: 40(r - 0.5)
+      z: 0
+    scale:
+      x: 1.15cos(t / 48 * pi)
+      y: 1.15cos(t / 48 * pi)
+      z: 1.15cos(t / 48 * pi)
+
+valhalla_critical_poison:
+  image: default_image
+  glyph: "✦ CRIT"
+  glyph-font: "minecraft:default"
+  color: "#66CC69"
+  duration: 24
+  interval: 2
+  show-global-player: false
+  number-format: "#.#"
+  transformation:
+    position:
+      x: 0
+      y: 1.8sin(t / 48 * pi)
+      z: 0
+    rotation:
+      x: 40(r - 0.5)
+      y: 40(r - 0.5)
+      z: 0
+    scale:
+      x: 1.15cos(t / 48 * pi)
+      y: 1.15cos(t / 48 * pi)
+      z: 1.15cos(t / 48 * pi)
+
+valhalla_critical_falling:
+  image: default_image
+  glyph: "✦ CRIT"
+  glyph-font: "minecraft:default"
+  color: "#EBA88B"
+  duration: 24
+  interval: 2
+  show-global-player: false
+  number-format: "#.#"
+  transformation:
+    position:
+      x: 0
+      y: 1.8sin(t / 48 * pi)
+      z: 0
+    rotation:
+      x: 40(r - 0.5)
+      y: 40(r - 0.5)
+      z: 0
+    scale:
+      x: 1.15cos(t / 48 * pi)
+      y: 1.15cos(t / 48 * pi)
+      z: 1.15cos(t / 48 * pi)
+
+valhalla_critical_melee:
+  image: default_image
+  glyph: "✦ CRIT"
+  glyph-font: "minecraft:default"
+  color: "#FF6666"
+  duration: 24
+  interval: 2
+  show-global-player: false
+  number-format: "#.#"
+  transformation:
+    position:
+      x: 0
+      y: 1.8sin(t / 48 * pi)
+      z: 0
+    rotation:
+      x: 40(r - 0.5)
+      y: 40(r - 0.5)
+      z: 0
+    scale:
+      x: 1.15cos(t / 48 * pi)
+      y: 1.15cos(t / 48 * pi)
+      z: 1.15cos(t / 48 * pi)
+
+valhalla_critical_bleed:
+  image: default_image
+  glyph: "✦ CRIT"
+  glyph-font: "minecraft:default"
+  color: "#BE4040"
+  duration: 24
+  interval: 2
+  show-global-player: false
+  number-format: "#.#"
+  transformation:
+    position:
+      x: 0
+      y: 1.8sin(t / 48 * pi)
+      z: 0
+    rotation:
+      x: 40(r - 0.5)
+      y: 40(r - 0.5)
+      z: 0
+    scale:
+      x: 1.15cos(t / 48 * pi)
+      y: 1.15cos(t / 48 * pi)
+      z: 1.15cos(t / 48 * pi)
+
+valhalla_critical_freezing:
+  image: default_image
+  glyph: "✦ CRIT"
+  glyph-font: "minecraft:default"
+  color: "#74D6FF"
+  duration: 24
+  interval: 2
+  show-global-player: false
+  number-format: "#.#"
+  transformation:
+    position:
+      x: 0
+      y: 1.8sin(t / 48 * pi)
+      z: 0
+    rotation:
+      x: 40(r - 0.5)
+      y: 40(r - 0.5)
+      z: 0
+    scale:
+      x: 1.15cos(t / 48 * pi)
+      y: 1.15cos(t / 48 * pi)
+      z: 1.15cos(t / 48 * pi)
+
+valhalla_critical_lightning:
+  image: default_image
+  glyph: "✦ CRIT"
+  glyph-font: "minecraft:default"
+  color: "#FFF176"
+  duration: 24
+  interval: 2
+  show-global-player: false
+  number-format: "#.#"
+  transformation:
+    position:
+      x: 0
+      y: 1.8sin(t / 48 * pi)
+      z: 0
+    rotation:
+      x: 40(r - 0.5)
+      y: 40(r - 0.5)
+      z: 0
+    scale:
+      x: 1.15cos(t / 48 * pi)
+      y: 1.15cos(t / 48 * pi)
+      z: 1.15cos(t / 48 * pi)
+
+valhalla_critical_bludgeoning:
+  image: default_image
+  glyph: "✦ CRIT"
+  glyph-font: "minecraft:default"
+  color: "#F28D63"
+  duration: 24
+  interval: 2
+  show-global-player: false
+  number-format: "#.#"
+  transformation:
+    position:
+      x: 0
+      y: 1.8sin(t / 48 * pi)
+      z: 0
+    rotation:
+      x: 40(r - 0.5)
+      y: 40(r - 0.5)
+      z: 0
+    scale:
+      x: 1.15cos(t / 48 * pi)
+      y: 1.15cos(t / 48 * pi)
+      z: 1.15cos(t / 48 * pi)
+
+valhalla_critical_radiant:
+  image: default_image
+  glyph: "✦ CRIT"
+  glyph-font: "minecraft:default"
+  color: "#FFF6B1"
+  duration: 24
+  interval: 2
+  show-global-player: false
+  number-format: "#.#"
+  transformation:
+    position:
+      x: 0
+      y: 1.8sin(t / 48 * pi)
+      z: 0
+    rotation:
+      x: 40(r - 0.5)
+      y: 40(r - 0.5)
+      z: 0
+    scale:
+      x: 1.15cos(t / 48 * pi)
+      y: 1.15cos(t / 48 * pi)
+      z: 1.15cos(t / 48 * pi)
+
+valhalla_critical_necrotic:
+  image: default_image
+  glyph: "✦ CRIT"
+  glyph-font: "minecraft:default"
+  color: "#9987B9"
+  duration: 24
+  interval: 2
+  show-global-player: false
+  number-format: "#.#"
+  transformation:
+    position:
+      x: 0
+      y: 1.8sin(t / 48 * pi)
+      z: 0
+    rotation:
+      x: 40(r - 0.5)
+      y: 40(r - 0.5)
+      z: 0
+    scale:
+      x: 1.15cos(t / 48 * pi)
+      y: 1.15cos(t / 48 * pi)
+      z: 1.15cos(t / 48 * pi)
+
+valhalla_critical_other:
+  image: default_image
+  glyph: "✦ CRIT"
+  glyph-font: "minecraft:default"
+  color: "#EEEEEE"
+  duration: 24
+  interval: 2
+  show-global-player: false
+  number-format: "#.#"
+  transformation:
+    position:
+      x: 0
+      y: 1.8sin(t / 48 * pi)
+      z: 0
+    rotation:
+      x: 40(r - 0.5)
+      y: 40(r - 0.5)
+      z: 0
+    scale:
+      x: 1.15cos(t / 48 * pi)
+      y: 1.15cos(t / 48 * pi)
+      z: 1.15cos(t / 48 * pi)
