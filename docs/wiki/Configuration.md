@@ -1,7 +1,7 @@
 # Configuration Guide — BetterDamage × ValhallaMMO (Beta)
 
 > [!WARNING]
-> **BETA TESTING — NOT STABLE.** This integration is experimental. Back up your server, world, and configuration files before installing. Test on a separate Purpur 26.3 server first. The GitHub prerelease is **v2.2.0-valhalla-beta.1**; a successful compilation does not establish in-game compatibility.
+> **BETA TESTING — NOT STABLE.** This integration is experimental. Back up your server, world, and configuration files before installing. Test on a separate Purpur 26.3 server first. The current GitHub prerelease series is **v2.2.0-valhalla-beta.2**; a successful compilation does not establish in-game compatibility.
 
 This page documents the implementation in [this BetterDamage fork](https://github.com/schisophrenic/BetterDamageValhallammoIntegration). It does **not** change `ValhallaEquipment/config.yml`: all settings here are in **BetterDamage**.
 
@@ -207,7 +207,7 @@ These settings are in the same `plugins/BetterDamage/config.yml` file:
 
 ### Related links
 
-- [Beta release](https://github.com/schisophrenic/BetterDamageValhallammoIntegration/releases/tag/v2.2.0-valhalla-beta.1)
+- [Beta release](https://github.com/schisophrenic/BetterDamageValhallammoIntegration/releases/tag/v2.2.0-valhalla-beta.2)
 - [BetterDamage fork repository](https://github.com/schisophrenic/BetterDamageValhallammoIntegration)
 
 ---
